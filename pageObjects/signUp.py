@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class SignUpPage:
     def __init__(self, driver):
         self.driver = driver
@@ -74,7 +75,8 @@ class SignUpPage:
 
     def get_email_validation_message(self):
         try:
-            validation_message_element = self.driver.find_element(By.XPATH, "//p[normalize-space()='Enter a valid email']")
+            validation_message_element = self.driver.find_element(By.XPATH,
+                                                                  "//p[normalize-space()='Enter a valid email']")
             return validation_message_element.text
         except NoSuchElementException:
             print("Email validation message not found.")
@@ -101,3 +103,15 @@ class SignUpPage:
     def get_selected_gender(self):
         gender_dropdown = Select(self.wait_for_element_visible(By.ID, "gender"))
         return gender_dropdown.first_selected_option.text if gender_dropdown else ""
+
+    def get_email_exists_message(self):
+        try:
+            validation_message_element = self.driver.find_element(By.XPATH,
+                                                                  "//div[@id='toast-container']")
+            return validation_message_element.text
+        except NoSuchElementException:
+            print("Email already exists validation message not found.")
+            return ""
+
+    def navigate_to_signup_page(self):
+        self.driver.get("https://appradiofm.com/signup")

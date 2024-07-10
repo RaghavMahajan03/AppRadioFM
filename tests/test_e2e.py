@@ -58,9 +58,27 @@ class TestSignUp(BaseClass):
         self.signup_page.select_gender("Male")
         assert self.signup_page.get_selected_gender() == "Male"
 
+    def test_email_already_exists(self):
+        self.signup_page.enter_username("Test")
+        self.signup_page.enter_email("true@yopmail.com")
+        self.signup_page.select_gender("Male")
+        self.signup_page.enter_password("String@123")
+        self.signup_page.enter_confirm_password("String@123")
+        self.signup_page.submit_form()
+
+        validation_message = self.signup_page.get_email_exists_message()
+        assert "Email Id already exists" in validation_message
+
+    # Navigate back to the sign-up page
+        self.signup_page.navigate_to_signup_page()
+        self.wait_for_title_contains("Register")
+        assert "Register" in self.driver.title
+
+
+
     def test_successful_form_submission(self):
         self.signup_page.enter_username("Testing")
-        self.signup_page.enter_email("mik@yopmail.com")
+        self.signup_page.enter_email("mikkeykk@yopmail.com")
         self.signup_page.select_gender("Male")
         self.signup_page.enter_password("String@123")
         self.signup_page.enter_confirm_password("String@123")
