@@ -76,6 +76,10 @@ class TestSignUp(BaseClass):
 
 
 
+
+
+
+
     def test_successful_form_submission(self):
         self.signup_page.enter_username("Testing")
         self.signup_page.enter_email("noneeyy@yopmail.com")
