@@ -78,7 +78,7 @@ class TestSignUp(BaseClass):
 
     def test_successful_form_submission(self):
         self.signup_page.enter_username("Testing")
-        self.signup_page.enter_email("mikkeykk@yopmail.com")
+        self.signup_page.enter_email("noneeyy@yopmail.com")
         self.signup_page.select_gender("Male")
         self.signup_page.enter_password("String@123")
         self.signup_page.enter_confirm_password("String@123")
@@ -88,3 +88,13 @@ class TestSignUp(BaseClass):
         self.wait_for_url_change(old_url)
         assert "signup" in self.driver.current_url
 
+
+    def test_otp_verification(self):
+
+        otp = "1234"  # Replace with the actual OTP or a method to retrieve it
+        self.signup_page.enter_otp(otp)
+        self.signup_page.submit_otp()
+
+        # Add assertions to verify successful OTP submission
+        self.wait_for_title_contains("Success")
+        assert "Success" in self.driver.title

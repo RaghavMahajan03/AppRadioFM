@@ -115,3 +115,13 @@ class SignUpPage:
 
     def navigate_to_signup_page(self):
         self.driver.get("https://appradiofm.com/signup")
+
+    def enter_otp(self, otp):
+        otp_fields = self.driver.find_elements(By.XPATH,"//div//input[@type='number']") # Adjust selector as necessary
+        for i, digit in enumerate(otp):
+            otp_fields[i].send_keys(digit)
+
+    def submit_otp(self):
+        verify_button = self.wait_for_element_clickable(By.XPATH, "//input[@value='VERIFY']")
+        if verify_button:
+            verify_button.click()
